@@ -1,5 +1,5 @@
 import pymongo
-#import sys
+import sys
 
 connection = pymongo.Connection("localhost", safe=True)
 db = connection.m101
@@ -15,3 +15,11 @@ person = {'name':'Barack Obama', 'role':'President',
 
 
 people.insert(person)
+
+print person
+
+try:
+    people.insert(person)
+except:
+    print "insert failed:", sys.exc_info()[0],'--',sys.exc_info()[1]
+
