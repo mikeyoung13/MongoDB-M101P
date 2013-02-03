@@ -17,6 +17,7 @@ def drop_low_score():
     query = {'type':'homework'}
 
     try:
+        # db.grades.find({type:"homework"}).sort({student_id:1,score:-1})
         cursor = grades.find(query)
         cursor = cursor.sort([('student_id',pymongo.ASCENDING),('score',pymongo.DESCENDING)])
 
@@ -28,14 +29,14 @@ def drop_low_score():
             if (currentStudentID != lastStudentID):
                 if (lastStudentID != -1):
                     print 'delete',lastStudentID, currentStudentID, lastObjectID, doc['score']
-                    db.grades.remove({'_id':lastObjectID})
                     # delete score
+                    db.grades.remove({'_id':lastObjectID})
                 lastStudentID = currentStudentID
             else:
                 print 'same student', doc['score']
             lastObjectID =  doc['_id'];
 
-
+        db.grades.remove({'_id':lastObjectID})
 
     except:
         print "Unexpected error:", sys.exc_info()[0]
