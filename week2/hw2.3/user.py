@@ -75,6 +75,7 @@ def validate_login(connection, username, password, user_record):
 
         # YOUR WORK HERE XXX
         # user = (just a suggestion)
+        user = users.find_one({"_id":username})
 
         # END OF STUDENT WORK
     except:
@@ -171,6 +172,7 @@ def newuser(connection, username, password, email):
         # XXX YOUR WORK HERE
         print "about to insert a user"
         # users.SOMETHING     (just a suggestion)
+        users.insert(user)
 
     except pymongo.errors.OperationFailure:
         print "oops, mongo error"
