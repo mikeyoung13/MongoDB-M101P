@@ -140,7 +140,7 @@ def post_newcomment():
     permalink = cgi.escape(permalink)
 
     # XXX HW 3.3 - Find the post that matches the permalink.
-    post = None  # Replace this line with your work.
+    post = posts.find_one({'permalink':permalink})  # Replace this line with your work.
 
     # if post not found, redirct to post not found error
     if post == None:
@@ -180,11 +180,13 @@ def post_newcomment():
             
             # your update here.
             print "about to update a blog post with a comment"
-            
-            #print "num documents updated" + last_error['n']
+
+            posts.update({'permalink':permalink},{'$push':{'comments':comment}})
+
+            print "num documents updated" + last_error['n']
         except:
             print "Could not update the collection, error"
-            print "Unexpected error:", sys.exc_info()[0]
+            print "Unexpected error:", sys.exc_info()[0],sys.exc_info()[1]
 
 
 
