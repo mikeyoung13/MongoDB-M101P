@@ -9,6 +9,7 @@ db.zips.aggregate([
      {
 	 _id: "$city",
 	 population: {$sum:"$pop"},
+     state: {$addToSet: "$state"}
      }
     },
     {$project:
@@ -16,6 +17,7 @@ db.zips.aggregate([
 	 _id: 0,
 	 city: "$_id",
 	 population: 1,
+     state: 1
      }
     },
     {$sort:
