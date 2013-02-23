@@ -1,11 +1,11 @@
 use blog
 db.posts.aggregate([
 
-    {$match:
-        {
-            "_id" : ObjectId("50ab0f8bbcf1bfe2536dc3f8")
-        }
-    },
+//    {$match:
+//        {
+//            "_id" : ObjectId("50ab0f8bbcf1bfe2536dc3f8")
+//        }
+//    },
 
     {$project:
         {
@@ -29,7 +29,7 @@ db.posts.aggregate([
         }
     },
 
-    {$limit: 2}
+    {$limit: 1}
 
 ])
 
