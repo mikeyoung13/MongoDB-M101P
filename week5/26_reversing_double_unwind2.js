@@ -6,6 +6,12 @@ db.inventory.insert({'name':"Chino Pants", 'sizes':["32x32", "31x30", "36x32"], 
 db.inventory.aggregate([
     {$unwind: "$sizes"},
     {$unwind: "$colors"},
+//    {
+//        "_id" : ObjectId("5128c517ed241b4dede3776a"),
+//        "name" : "Polo Shirt",
+//        "sizes" : "Small",
+//        "colors" : "navy"
+//    },
     /* create the color array */
     {$group: 
      {
