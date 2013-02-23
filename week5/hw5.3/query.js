@@ -1,27 +1,33 @@
 use hw5-3
 db.grades.aggregate([
-//    {
-//        $match: {
-//             _id:ObjectId("50b59cd75bed76f46522c34e")
-//        }
-//    }
-//    ,
     {
         $unwind: "$scores"
     }
     ,
     {
-        $match: {$or:[{"scores.type":"quiz"},{"scores.type":"exam"}]}
+        $match: {$or:[{"scores.type":"homework"},{"scores.type":"exam"}]}
     }
-
-//      $match : {$or:[{state:"CA"},{state:"NY"}]}
-
-//    ,
-//    {
-//        $group : {
-//            _id: "$scores.type",
-//            count:{$sum:1}
-//        }
-//    }
+    ,
+    {
+        $group : {
+            _id: {student_id:"$student_id",
+                  class_id: "$class_id"}
+            ,
+            student_ave:{$avg:"$scores.score"}
+        }
+    }
+    ,
+    {
+        $group : {
+            _id: {'class': "$_id.class_id"},
+            class_average:{$avg:"$student_ave"}
+        }
+    }
+    ,
+    {$sort:
+        {"class_average":-1}
+    }
+    ,
+    {$limit: 1}
 
 ])
