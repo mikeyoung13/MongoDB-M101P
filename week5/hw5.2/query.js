@@ -1,16 +1,24 @@
 use hw5-2
 db.zips.aggregate([
     {
-        $match : {$or:[{state:"CT"},{state:"NJ"}]}
+        $match : {$or:[{state:"CA"},{state:"NY"}]}
     },
     {
         $group : {
-            _id:"$city",
-            ave_pop:{$avg:"$pop"}
+            _id:
+                {city:"$city",
+                 state: "$state"},
+            pop:{$sum:"$pop"}
         }
     },
     {
-        $match : {ave_pop:{$gt:25000}}
+        $match : {pop:{$gt:25000}}
+    },
+    {
+        $group : {
+            _id:null,
+            ave_pop:{$avg:"$pop"}
+        }
     }
 
 ])
