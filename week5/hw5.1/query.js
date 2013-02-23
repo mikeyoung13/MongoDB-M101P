@@ -9,11 +9,27 @@ db.posts.aggregate([
 
     {$project:
         {
-            _id:0,
-            'comments.author' : 1
+            //_id:0,
+            author: "$comments.author"
         }
     },
 
-    {$unwind:"$comments"}
+    {$unwind:"$author"},
+
+    {$group:
+        {
+            _id:"$author",
+            numComments:{$sum:1}
+        }
+    },
+
+    {$sort:
+        {
+            numComments:-1
+        }
+    },
+
+    {$limit: 2}
+
 ])
 
