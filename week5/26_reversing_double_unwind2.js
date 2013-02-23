@@ -19,6 +19,37 @@ db.inventory.aggregate([
 	 'colors': {$push: "$colors"},
      }
     },
+
+//    {
+//        "sizes" : [
+//            "Medium",
+//            "Large",
+//            "Small"
+//        ],
+//        "name" : "Polo Shirt",
+//        "colors" : [
+//            "navy",
+//            "white",
+//            "orange",
+//            "red"
+//        ]
+//    },
+//    {
+//        "sizes" : [
+//            "Medium",
+//            "Small",
+//            "X-Large",
+//            "Large"
+//        ],
+//        "name" : "T-Shirt",
+//        "colors" : [
+//            "navy",
+//            "black",
+//            "orange",
+//            "red"
+//        ]
+//    },
+
     /* create the size array */
     {$group: 
      {
